@@ -1,0 +1,6 @@
+if(MSVC)
+#    <GenerateManifest>false</GenerateManifest>
+#    set(CMAKE_SHARED_LINKER_FLAGS_<CONFIG> /MANIFEST:NO)
+#    set(CMAKE_EXE_LINKER_FLAGS_<CONFIG> /MANIFEST:NO)
+set(CMAKE_EXE_LINKER_FLAGS /MANIFEST:NO)
+endif()

@@ -48,5 +48,5 @@ set(_output_suffix ${_output_suffix}$<$<CONFIG:Debug>:d>)
 # 添加子目录
 #--------------------------------------------------------------------
 
-add_subdirectory(c macro)
+add_subdirectory("c macro")
 #add_subdirectory(src)

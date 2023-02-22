@@ -1,0 +1,6 @@
+function(function_set_static_msvc_runtime argv1)
+    if (MSVC AND NOT USE_MSVC_RUNTIME_LIBRARY_DLL)
+        message("${argv1} = static")
+        set_property(TARGET ${argv1} PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+    endif ()
+endfunction()
