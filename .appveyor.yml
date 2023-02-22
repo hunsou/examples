@@ -17,7 +17,7 @@ build_script:
 after_build:
   - IF EXIST Debug cd Debug
   - hello.exe
-  ps: |
+  - ps: |
     function CalculateHash($file)
     {
         $newLine = "`r`n"
