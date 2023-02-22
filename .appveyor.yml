@@ -32,10 +32,12 @@ after_build:
     }
     
     $WorkingFolder = "$env:APPVEYOR_BUILD_FOLDER\build\bin"
-    $ZipFile = "$WorkingFolder\$env:APPVEYOR_PROJECT_NAME-nightly--$env:APPVEYOR_BUILD_WORKER_IMAGE-$env:APPVEYOR_BUILD_VERSION.zip"
+    $ZipFile = "$WorkingFolder\$env:APPVEYOR_PROJECT_NAME-$env:APPVEYOR_BUILD_VERSION.zip"
     $ReleaseFile = "$WorkingFolder\*"
     7z a $ZipFile $ReleaseFile
     Push-AppveyorArtifact $ZipFile
+    
+    #-$env:APPVEYOR_BUILD_WORKER_IMAGE
     
     #$ZipFile1 = "$WorkingFolder\$env:APPVEYOR_PROJECT_NAME-CMU-nightly-$env:APPVEYOR_BUILD_VERSION.zip"
     #$ReleaseFile1 = "C:\CMU\*"    
