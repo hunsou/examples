@@ -1,0 +1,50 @@
+image: Visual Studio 2013
+
+environment:
+  matrix:
+    - generator: "Visual Studio 12 2013 Win64"
+    - generator: "MSYS Makefiles"
+
+before_build:
+  - IF "%generator%"=="MSYS Makefiles" set PATH=C:\msys64\usr\bin;C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\bin;%PATH%
+
+build_script:
+  - mkdir build
+  - cd build
+  - cmake -G "%generator%" ..
+  - cmake --build .
+
+after_build:
+  - IF EXIST Debug cd Debug
+  - hello.exe
+
+
+after_build:
+  ps: |
+    function CalculateHash($file)
+    {
+        $newLine = "`r`n"
+        $text = (Split-Path $file -Leaf) + $newLine
+        $text += 'MD5' + $newLine
+        $text += (Get-FileHash $file -Algorithm MD5).Hash + $newLine
+        $text += 'SHA-1' + $newLine
+        $text += (Get-FileHash $file -Algorithm SHA1).Hash + $newLine
+        $text += 'SHA-256' + $newLine
+        $text += (Get-FileHash $file -Algorithm SHA256).Hash + $newLine
+        $text += 'SHA-512' + $newLine
+        $text += (Get-FileHash $file -Algorithm SHA512).Hash
+        return $text
+    }
+    
+    $WorkingFolder = "$env:APPVEYOR_BUILD_FOLDER\build"
+    $ZipFile = "$WorkingFolder\$env:APPVEYOR_PROJECT_NAME-nightly-$env:APPVEYOR_BUILD_VERSION.zip"
+    $ReleaseFile = "$WorkingFolder\*"
+    7z a $ZipFile $ReleaseFile
+    Push-AppveyorArtifact $ZipFile
+    
+    $ZipFile1 = "$WorkingFolder\$env:APPVEYOR_PROJECT_NAME-CMU-nightly-$env:APPVEYOR_BUILD_VERSION.zip"
+    $ReleaseFile1 = "C:\CMU\*"    
+    7z a $ZipFile1 $ReleaseFile1
+    $ReleaseFile1 = "c:\OpenSSL-Win32\*"
+    7z a $ZipFile1 $ReleaseFile1    
+    Push-AppveyorArtifact $ZipFile1
