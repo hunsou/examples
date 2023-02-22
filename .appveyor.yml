@@ -31,17 +31,17 @@ after_build:
         return $text
     }
     
-    $WorkingFolder = "$env:APPVEYOR_BUILD_FOLDER\build"
-    $ZipFile = "$WorkingFolder\$env:APPVEYOR_PROJECT_NAME-nightly-$env:APPVEYOR_BUILD_VERSION.zip"
+    $WorkingFolder = "$env:APPVEYOR_BUILD_FOLDER\build\bin"
+    $ZipFile = "$WorkingFolder\$env:APPVEYOR_PROJECT_NAME-nightly--$env:APPVEYOR_BUILD_WORKER_IMAGE-$env:APPVEYOR_BUILD_VERSION.zip"
     $ReleaseFile = "$WorkingFolder\*"
     7z a $ZipFile $ReleaseFile
     Push-AppveyorArtifact $ZipFile
     
-    $ZipFile1 = "$WorkingFolder\$env:APPVEYOR_PROJECT_NAME-CMU-nightly-$env:APPVEYOR_BUILD_VERSION.zip"
-    $ReleaseFile1 = "C:\CMU\*"    
-    7z a $ZipFile1 $ReleaseFile1
-    $ReleaseFile1 = "c:\OpenSSL-Win32\*"
-    7z a $ZipFile1 $ReleaseFile1    
-    Push-AppveyorArtifact $ZipFile1
+    #$ZipFile1 = "$WorkingFolder\$env:APPVEYOR_PROJECT_NAME-CMU-nightly-$env:APPVEYOR_BUILD_VERSION.zip"
+    #$ReleaseFile1 = "C:\CMU\*"    
+    #7z a $ZipFile1 $ReleaseFile1
+    #$ReleaseFile1 = "c:\OpenSSL-Win32\*"
+    #7z a $ZipFile1 $ReleaseFile1    
+    #Push-AppveyorArtifact $ZipFile1
 #  - IF EXIST Debug cd Debug
 #  - hello.exe
