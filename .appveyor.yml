@@ -15,9 +15,7 @@ build_script:
   - cmake --build .
 
 after_build:
-  - IF EXIST Debug cd Debug
-  - hello.exe
-  - ps: |
+  ps: |
     function CalculateHash($file)
     {
         $newLine = "`r`n"
@@ -45,3 +43,5 @@ after_build:
     $ReleaseFile1 = "c:\OpenSSL-Win32\*"
     7z a $ZipFile1 $ReleaseFile1    
     Push-AppveyorArtifact $ZipFile1
+#  - IF EXIST Debug cd Debug
+#  - hello.exe
