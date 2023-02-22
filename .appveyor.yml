@@ -1,8 +1,8 @@
-image: Visual Studio 2013
+image: Visual Studio 2017
 
 environment:
   matrix:
-    - generator: "Visual Studio 12 2013 Win64"
+    - generator: "Visual Studio 17 2022 Win64"
     - generator: "MSYS Makefiles"
 
 before_build:
