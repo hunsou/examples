@@ -17,9 +17,6 @@ build_script:
 after_build:
   - IF EXIST Debug cd Debug
   - hello.exe
-
-
-after_build:
   ps: |
     function CalculateHash($file)
     {
