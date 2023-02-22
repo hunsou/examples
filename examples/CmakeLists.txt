@@ -1,3 +1,4 @@
 cmake_minimum_required(VERSION 3.10)
 project(hello C)
-add_executable(hello 1.c)
+add_executable(hello1 1.c)
+add_executable(hello2 2.c)
